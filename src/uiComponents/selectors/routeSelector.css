@@ -1,0 +1,9 @@
+.App #route-selector .routes-display {
+  display: block;
+  text-align: left;
+}
+
+.App #route-selector .routes-display input {
+  display: inherit;
+  text-align: inherit;
+}
