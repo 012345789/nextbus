@@ -2,6 +2,7 @@
 // endpoint: http://webservices.nextbus.com/service/publicJSONFeed?command=routeList&a=sf-muni
 
 import * as d3 from 'd3';
+import populateRouteChoices from '../uiComponents/selectors/routeSelector.js';
 
 const endpoint = "http://webservices.nextbus.com/service/publicJSONFeed?command=routeList&a=sf-muni";
 
@@ -13,6 +14,10 @@ export default function getBusData() {
       throw new Error(error);
     }
 
-    console.log('fetched nextbus data: ', data);
-  })
+    // console.log('fetched nextbus data: ', data);
+    populateRouteChoices(data);
+    // return data;
+  });
+  // console.log('outer result: ', result);
+  // return result;
 }

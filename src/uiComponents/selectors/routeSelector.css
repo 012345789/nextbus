@@ -1,9 +1,18 @@
-.App #route-selector .routes-display {
+.App #route-selector-container #route-selector #routes-display {
   display: block;
   text-align: left;
+  height: 350px;
+  overflow: scroll;
+  border: solid 1px #90C3D4;
+  border-radius: 6px;
+  padding: 5px;
+  margin-top: 12px;
 }
 
-.App #route-selector .routes-display input {
-  display: inherit;
+.App #route-selector-container #route-selector #routes-display input {
   text-align: inherit;
+}
+
+.App #route-selector-container #route-selector h4 {
+  margin: 4px;
 }
