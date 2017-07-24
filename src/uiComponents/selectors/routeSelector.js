@@ -3,10 +3,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 // import getBusData from '../../services/nextbusLines.js';
 // import _ from 'underscore';
-import muniDataByLine from '../../services/muniDataByLine.js';
-import map from '../baseMap/map.js';
-
-console.log('routeSelector map: ', map);
+// import muniData from '../../services/muniLinesData.js';
+// import map from '../baseMap/map.js';
+import createColorIndicator from './busColorIndicator.js';
+import updateBusDisplay from './updateBusDisplay.js';
 
 // TODO: rename to RenderChoices
 export default function populateRouteChoices(data) {
@@ -15,16 +15,22 @@ export default function populateRouteChoices(data) {
   let selectedRoutes = new Set();
 
   let busRoutes = data.route;
+  console.log("busRoutes: ", busRoutes)
 
   busRoutes.forEach(route => {
     routeChoices.push(
       <div className="route-choice" key={route.tag}>
-        <input
-          type="checkbox"
-          value={route.tag}
-          onChange={() => _checkboxToggled(route.tag)}
-        />
-        {route.tag}
+        <div>
+          <input
+            type="checkbox"
+            value={route.tag}
+            onChange={() => _checkboxToggled(route.tag)}
+          />
+        </div>
+        <div>
+          {route.tag}
+        </div>
+        {createColorIndicator(route.tag)}
       </div>
     );
   });
@@ -32,7 +38,9 @@ export default function populateRouteChoices(data) {
   let routeSelection =
     <div id="route-selector">
     <h4> Select Routes </h4>
-      <button id="getLineRoutes" onClick={getRouteData}> Apply </button>
+      {
+        // <button id="getLineRoutes" onClick={getRouteData}> Apply </button>
+      }
       <div id="routes-display">
         {routeChoices}
       </div>
@@ -41,22 +49,20 @@ export default function populateRouteChoices(data) {
 
   ReactDOM.render(routeSelection, document.getElementById('route-selector-container'));
 
+  // muniData.getLineData(map.geoPath);
+
   function _checkboxToggled(value) {
     if (selectedRoutes.has(value)) {
       selectedRoutes.delete(value);
     } else {
       selectedRoutes.add(value);
     }
+    updateBusDisplay(selectedRoutes);
   }
 
-  function getRouteData() {
-    muniDataByLine('bogus line', map.geoPath);
-  }
-
-  // let routeListPromise = getBusData();
-  // console.log('routeListPromise: ', routeListPromise)
-
-  // let data = routeListPromise
+  // function getRouteData() {
+  //   muniDataByLine('bogus line', map.geoPath);
+  // }
 
   // routeListPromise.then((routeList, routeList2) => {
   //   let routeChoices = [];
@@ -72,21 +78,6 @@ export default function populateRouteChoices(data) {
   //
   //   ReactDOM.render(dynamicContent, document.getElementById('route-selector-container'));
   // });
-
-  // group together by tag
-  // const testElem =
-  //   <div id="route-selector">
-  //   <h4> Select Routes </h4>
-  //     <div className="routes-display">
-  //       <div className="route-choice">
-  //         <input type="checkbox"/> N
-  //       </div>
-  //       <div className="route-choice">
-  //         <input type="checkbox"/> 16
-  //       </div>
-  //     </div>
-  //   </div>
-  // ;
 
 
 }

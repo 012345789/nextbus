@@ -1,8 +1,4 @@
 import * as d3 from 'd3';
-// import arteries from '../geoJson/sfmaps/arteries.json';
-// import freeways from '../geoJson/sfmaps/freeways.json';
-// import neighborhoods from '../geoJson/sfmaps/neighborhoods.json';
-// import test_neighborhoods from '../geoJson/sfmaps/test_neighborhoods.json';
 import streets from '../../geoJson/sfmaps/streets.json';
 
 var map = {};
@@ -52,31 +48,40 @@ map.load = function() {
     .scale(scale).translate(offset)
   ;
 
-  var g = svg.append( "g" );
+  // var g = svg.append( "g" );
 
   geoPath = geoPath.projection(newProjection);
 
   // add a rectangle to see the bound of the svg
-  svg.append("rect").attr('width', width).attr('height', height)
+  let rect = svg.append("rect").attr('width', width).attr('height', height)
     .style('stroke', 'black').style('fill', 'none')
   ;
 
-  svg.selectAll("path").data(geoJson.features).enter().append("path")
+  rect.selectAll("path").data(geoJson.features).enter().append("path")
+    .attr("d", geoPath)
+    // .style("fill", "red")
+    .style("stroke-width", "2")
+    .style("stroke", "black")
+  ;
+
+  let g2 = svg.append("g").attr('width', width).attr('height', height)
+    .style('stroke', 'black').style('fill', 'none')
+  ;
+
+  g2.selectAll("path").data(geoJson.features).enter().append("path")
     .attr("d", geoPath)
     .style("fill", "red")
     .style("stroke-width", "1")
     .style("stroke", "black")
   ;
 
-  g.selectAll( "path" )
-    .data(geoJson.features)
-    .enter()
-    .append( "path" )
-    .attr( "fill", "#ccc" )
-    .attr( "d", geoPath )
-  ;
-
-  console.log('geoPath1: ', geoPath);
+  // g.selectAll( "path" )
+  //   .data(geoJson.features)
+  //   .enter()
+  //   .append( "path" )
+  //   .attr( "fill", "#ccc" )
+  //   .attr( "d", geoPath )
+  // ;
 
   // return geoPath;
   map.geoPath = geoPath;

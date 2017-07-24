@@ -7,8 +7,7 @@ import populateRouteChoices from '../uiComponents/selectors/routeSelector.js';
 const endpoint = "http://webservices.nextbus.com/service/publicJSONFeed?command=routeList&a=sf-muni";
 
 // TODO: rename method
-export default function getBusData() {
-  // console.log('json: ', d3.json)
+export default function getBusRoutes() {
   d3.json(endpoint, function(error, data) {
     if (error) {
       throw new Error(error);
