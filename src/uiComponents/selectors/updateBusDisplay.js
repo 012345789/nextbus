@@ -3,16 +3,29 @@ import muniData from '../../services/muniLinesData.js';
 import map from '../baseMap/map.js';
 import _ from 'underscore';
 
-export default function updateBusDisplay(lines) {
+var pollBus = {};
+
+pollBus.updateBusDisplay = function(lines) {
+
+  if (!lines && !pollBus.previousLines) {
+    // user has not interacted with selector
+    return;
+  }
+
+  if (!lines) {
+    // no change since user's last input. but there is updated data from server
+    lines = pollBus.previousLines;
+  }
 
   let geoPath = map.geoPath;
 
   let svg = d3.select("svg");
-  // clear stale buses
-  d3.select("#buses").remove();
 
-  let busPoints = svg.append("g")
-    .attr("id", "buses");
+  // clear stale buses
+  d3.selectAll(".bus").remove();
+
+  // let busPoints = svg.append("g")
+  //   .attr("id", "buses");
 
   // let busPoints = muniData.busPoints;
   let vehiclesByRouteTag = muniData.vehiclesData;
@@ -21,19 +34,22 @@ export default function updateBusDisplay(lines) {
 
   lines.forEach(line => {
 
-    // console.log('vehiclesByRouteTag: ', vehiclesByRouteTag)
     if (!vehiclesByRouteTag[line]) {
       // no vehicles found for this bus route
       return;
     }
 
+    let busPoint = svg.append("g")
+      .attr("class", "bus")
     let features = vehiclesByRouteTag[line].buses;
     let color = vehiclesByRouteTag[line].color;
 
-    busPoints.selectAll("path")
+    busPoint.selectAll("path")
       .data(features)
+
       .enter()
       .append("path")
+      // .merge(busPoints)
       // fill needs to be dynamic
       // .attr("fill", "#2F4952")
       .attr("fill", color)
@@ -41,6 +57,8 @@ export default function updateBusDisplay(lines) {
       .attr("d", geoPath)
     ;
   });
+
+  pollBus.previousLines = lines;
 
   // _.each(vehiclesByRouteTag, (busesOfRoute, route) => {
   //   busPoints.selectAll("path")
@@ -57,3 +75,5 @@ export default function updateBusDisplay(lines) {
   // });
 
 }
+
+export default pollBus;

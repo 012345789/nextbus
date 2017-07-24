@@ -6,6 +6,7 @@ import map from './uiComponents/baseMap/map.js';
 import getBusRoutes from './services/nextbusLines.js';
 // import populateRouteChoices from './uiComponents/selectors/routeSelector.js';
 import muniData from './services/muniLinesData.js';
+import pollBus from './uiComponents/selectors/updateBusDisplay.js';
 
 class App extends Component {
 
@@ -24,9 +25,6 @@ class App extends Component {
             <div id="route-selector-container" className="col-2">
             </div>
             <div id="vis" className="col-10">
-              {
-              /*<div id="map2222" className="col-8"></div>*/
-              }
               <div id="map"></div>
             </div>
           </div>
@@ -40,7 +38,12 @@ class App extends Component {
     map.load();
     // muniData.initializeElements();
     // set interval here
+    // setInterval(muniData.load, 12000);
     muniData.load();
+    setInterval(function () {
+      muniData.load();
+      pollBus.updateBusDisplay();
+    }, 15000);
   }
 
 }

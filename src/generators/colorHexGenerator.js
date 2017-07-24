@@ -2,17 +2,18 @@
 
 export default function generateColorHex(str) {
   // return `#${intToRGB(hashCode(str))}`;
-  let result = `#${intToRGB(hashCode(str))}`;
+  let result = `#${intToRGB(hashCode(hashCode(str)))}`;
   return result;
 }
 
 // https://stackoverflow.com/a/3426956
 function hashCode(str) {
-  // var hash = 0;
-  // for (var i = 0; i < str.length; i++) {
-  //   hash = str.charCodeAt(i) + ((hash << 5) - hash);
-  // }
-  // return hash;
+  str = str + "randomString"; // for wider spectrum of hashing
+  var hash = 0;
+  for (var i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return hash;
 
   // var hash = 0;
   //   if (str.length === 0) return hash;
@@ -23,13 +24,13 @@ function hashCode(str) {
   //   }
   //   return hash;
 
-  return (                       // 1
-    parseInt(                                 // 2
-        parseInt(str, 36)  // 3
-            .toExponential()                  // 4
-            .slice(2,-5)                      // 5
-    , 10) & 0xFFFFFF                          // 6
-  ).toString(16).toUpperCase();
+  // return (                       // 1
+  //   parseInt(                                 // 2
+  //       parseInt(str, 36)  // 3
+  //           .toExponential()                  // 4
+  //           .slice(2,-5)                      // 5
+  //   , 10) & 0xFFFFFF                          // 6
+  // ).toString(16).toUpperCase();
 }
 
 function intToRGB(i){

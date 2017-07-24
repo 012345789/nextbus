@@ -13,10 +13,6 @@ export default function getBusRoutes() {
       throw new Error(error);
     }
 
-    // console.log('fetched nextbus data: ', data);
     populateRouteChoices(data);
-    // return data;
   });
-  // console.log('outer result: ', result);
-  // return result;
 }

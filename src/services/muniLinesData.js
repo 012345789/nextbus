@@ -9,15 +9,6 @@ import generateColorHex from '../generators/colorHexGenerator.js';
 
 var muniData = {};
 
-// muniData.initializeElements = function() {
-  // let svg = d3.select("svg");
-
-  // let buses = svg.append("g")
-  //   .attr("id", "buses");
-
-  // muniData.busPoints = buses;
-// }
-
 // gets the data and maps it to our domain models
 muniData.load = function() {
   const endpoint = "http://webservices.nextbus.com/service/publicJSONFeed?command=vehicleLocations&a=sf-muni";
@@ -27,7 +18,6 @@ muniData.load = function() {
       throw new Error(error);
     }
 
-    console.log('route data for all buses: ', data);
     let vehicleData = data.vehicle;
 
     // format the data
@@ -63,8 +53,6 @@ muniData.load = function() {
       }
     });
 
-    console.log('latestVehicles object: ', latestVehicles)
-
     // attach bus figures to the map
     // let svg = d3.select("svg");
 
@@ -86,7 +74,6 @@ muniData.load = function() {
     // ;
 
     muniData.vehiclesData = latestVehicles;
-
   });
 }
 

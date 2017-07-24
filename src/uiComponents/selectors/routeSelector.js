@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 // import muniData from '../../services/muniLinesData.js';
 // import map from '../baseMap/map.js';
 import createColorIndicator from './busColorIndicator.js';
-import updateBusDisplay from './updateBusDisplay.js';
+import pollBus from './updateBusDisplay.js';
 
 // TODO: rename to RenderChoices
 export default function populateRouteChoices(data) {
@@ -15,7 +15,6 @@ export default function populateRouteChoices(data) {
   let selectedRoutes = new Set();
 
   let busRoutes = data.route;
-  console.log("busRoutes: ", busRoutes)
 
   busRoutes.forEach(route => {
     routeChoices.push(
@@ -57,7 +56,7 @@ export default function populateRouteChoices(data) {
     } else {
       selectedRoutes.add(value);
     }
-    updateBusDisplay(selectedRoutes);
+    pollBus.updateBusDisplay(selectedRoutes);
   }
 
   // function getRouteData() {

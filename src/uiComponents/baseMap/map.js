@@ -70,7 +70,7 @@ map.load = function() {
 
   g2.selectAll("path").data(geoJson.features).enter().append("path")
     .attr("d", geoPath)
-    .style("fill", "red")
+    // .style("fill", "red")
     .style("stroke-width", "1")
     .style("stroke", "black")
   ;
