@@ -1,21 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
 import './libraries/simple-grid.css';
-// import loadMap from './uiComponents/baseMap/map.js';
 import map from './uiComponents/baseMap/map.js';
 import getBusRoutes from './services/nextbusLines.js';
-// import populateRouteChoices from './uiComponents/selectors/routeSelector.js';
 import muniData from './services/muniLinesData.js';
 import pollBus from './uiComponents/selectors/updateBusDisplay.js';
 
 class App extends Component {
 
-  componentWillMount() {
-
-  }
-
   render() {
-
     getBusRoutes();
 
     return (
@@ -34,11 +27,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // populateRouteChoices();
     map.load();
-    // muniData.initializeElements();
-    // set interval here
-    // setInterval(muniData.load, 12000);
     muniData.load();
     setInterval(function () {
       muniData.load();
@@ -47,9 +36,5 @@ class App extends Component {
   }
 
 }
-
-// use albersProjection = d3.geoAlbers() function to process GeoJSON data.
-// figure out how to import d3 with React
-// albersProjection([-71.057, 42.313]); // longitude and latitude of Boston-ish
 
 export default App;
