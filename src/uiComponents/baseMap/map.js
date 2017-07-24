@@ -4,16 +4,8 @@ import streets from '../../geoJson/sfmaps/streets.json';
 var map = {};
 
 map.load = function() {
-// export default function loadMap() {
   var width = 600,
       height = 450;
-
-  // var svg = d3.select( "#map" )
-  //   .append( "svg" )
-  //   .attr( "width", width )
-  //   .attr( "height", height );
-
-  // var g = svg.append( "g" );
 
   var albersProjection = d3.geoAlbers();
 
@@ -29,14 +21,9 @@ map.load = function() {
   let bounds  = geoPath.bounds(geoJson);
   let hscale  = initialScale*width  / (bounds[1][0] - bounds[0][0]);
   let vscale  = initialScale*height / (bounds[1][1] - bounds[0][1]);
-  let scale   = Math.min(hscale, vscale); //(hscale < vscale) ? hscale : vscale;
+  let scale   = Math.min(hscale, vscale);
   let offset  = [width - (bounds[0][0] + bounds[1][0]),
                     height - (bounds[0][1] + bounds[1][1])/2];
-
-  // let vis = d3.select("#vis").append("svg")
-  //   .attr("width", width).attr("height", height);
-  // let map = d3.select("#vis").append("#map")
-  //   .attr("width", width).attr("height", height);
 
   var svg = d3.select( "#map" )
     .append( "svg" )
@@ -48,8 +35,6 @@ map.load = function() {
     .scale(scale).translate(offset)
   ;
 
-  // var g = svg.append( "g" );
-
   geoPath = geoPath.projection(newProjection);
 
   // add a rectangle to see the bound of the svg
@@ -59,7 +44,6 @@ map.load = function() {
 
   rect.selectAll("path").data(geoJson.features).enter().append("path")
     .attr("d", geoPath)
-    // .style("fill", "red")
     .style("stroke-width", "2")
     .style("stroke", "black")
   ;
@@ -70,20 +54,10 @@ map.load = function() {
 
   g2.selectAll("path").data(geoJson.features).enter().append("path")
     .attr("d", geoPath)
-    // .style("fill", "red")
     .style("stroke-width", "1")
     .style("stroke", "black")
   ;
 
-  // g.selectAll( "path" )
-  //   .data(geoJson.features)
-  //   .enter()
-  //   .append( "path" )
-  //   .attr( "fill", "#ccc" )
-  //   .attr( "d", geoPath )
-  // ;
-
-  // return geoPath;
   map.geoPath = geoPath;
 
 }

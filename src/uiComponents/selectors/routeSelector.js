@@ -9,7 +9,7 @@ export default function renderListOfRoutes(data) {
   let routeChoices = [];
   let selectedRoutes = new Set();
 
-  let busRoutes = data.route;
+  let busRoutes = data.route.sort();
 
   busRoutes.forEach(route => {
     routeChoices.push(
