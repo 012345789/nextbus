@@ -4,7 +4,7 @@ import generateColorHex from '../generators/colorHexGenerator.js';
 var muniData = {};
 
 muniData.load = function() {
-  const endpoint = "http://webservices.nextbus.com/service/publicJSONFeed?command=vehicleLocations&a=sf-muni";
+  const endpoint = "//webservices.nextbus.com/service/publicJSONFeed?command=vehicleLocations&a=sf-muni";
 
   d3.json(endpoint, function(error, data) {
     if (error) {
