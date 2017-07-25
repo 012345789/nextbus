@@ -1,4 +1,4 @@
-import * as d3 from 'd3';
+import fetch from 'isomorphic-fetch';
 import generateColorHex from '../generators/colorHexGenerator.js';
 
 var muniData = {};
@@ -6,11 +6,13 @@ var muniData = {};
 muniData.load = function() {
   const endpoint = "//webservices.nextbus.com/service/publicJSONFeed?command=vehicleLocations&a=sf-muni";
 
-  d3.json(endpoint, function(error, data) {
-    if (error) {
-      throw new Error(error);
+  fetch(endpoint).then(function(response) {
+    if (!response.ok) {
+      // end point may be unavailable
+      throw new Error(response.statusText);
     }
-
+    return response.json();
+  }).then(function(data) {
     let vehicleData = data.vehicle;
 
     let latestVehicles = {};
