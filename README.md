@@ -2,14 +2,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 This is a web application to track San Francisco Muni vehicles on a map.
 
-It will only run in a local development environment, meaning you must have a
-copy of the code on your machine. This is because Nextbus's API only accepts
-HTTP requests and not HTTPS. So while you can hit the API locally, if a site
-tries to do the same while, most browsers will not allow it due to security
-risks. It turns out trying to find a service to host web applications without
-SSL is practically impossible. In summary, run this application locally.
+The application will only run in a local development environment, so you must have a copy of the code on your machine. This is because NextBus's API only accepts HTTP requests and not HTTPS. Browsers will not allow HTTPS sites to call HTTP endpoints due to security risks. While I would have loved to host it on Heroku or something similar, it turns out trying to find a service to host web applications without SSL is practically impossible.
 
-To set up and run the application:
-1. clone this repository
-2. run `npm install`
-3. run `npm start` or `npm run build`
+To set up and run:
+`npm install`
+then `npm start` or `npm run build`
